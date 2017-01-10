@@ -237,7 +237,7 @@ end
 <%= render partial: "songs/song", collection: @playlist.songs %>
 </ul>
 
-<%= render partial: "songs/form"%> %>
+<%= render partial: "songs/form"%> %> #no need to pass in locals
 ```
 2.3 In views/songs/_forms.html.erb
 ```ruby
