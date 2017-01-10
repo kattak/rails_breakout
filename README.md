@@ -216,7 +216,7 @@ end
 <% end %>
 ```
 
-2. Alternative Method
+###2. Alternative Method
 2.1 In controllers/playlists_controller.rb
 ```ruby
 class PlaylistsController < ApplicationController
