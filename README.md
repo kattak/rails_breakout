@@ -22,7 +22,7 @@ These are the params in songs#create
 (* but can be created with @playlist = Playlist.find(params[:playlist_id])
 
 - Because of t.references playlist in songs migration>>>
-  -> Can use playlist AND playlist_id ?!
+  -> Can use playlist AND playlist_id ?! Yes, but only because has_many and belongs_to set up in playlist and song models respectively.
   
   * Uses playlist in seed
 ```ruby
@@ -43,10 +43,11 @@ Song.create!(title: "Collide", artist: "Satchmode", playlist: party)
 ```
   * Alternative method 
   ```ruby
-  playlist = params[:playlist_id]
-  playlist.songs << Song.new(song_params)
+    playlist = Playlist.find(params[:playlist_id])
+    @song = Song.new(song_params)
+    playlist.songs << @song
   ```
-  ** Does this work?
+  ** This works as well! :)
 
 
 ### Migrations
@@ -172,4 +173,77 @@ $("ul").append("<%= j render partial: 'song', locals: {song: @song} %>");
 > Can access @song.errors.full_messages
 ```javascript
 console.log("<%= j @song.errors.full_messages %>")
+```
+
+###Three Types of Submits
+1. BASIC HTTP Request (non-AJAX)
+2. AJAX call - Sinatra style
+3. AJAX call - Rails 5 style 
+
+
+###FORMS
+1. Alyssa's Method
+1.1 In controllers/playlists_controller.rb
+```ruby
+class PlaylistsController < ApplicationController
+.
+.
+.
+  def show
+    @playlist = Playlist.find_by(id: params[:id])
+    @song = Song.new(playlist: @playlist)
+  end
+end
+
+```
+1.2 In views/playlists/show.html.erb
+```ruby
+<h1><%= @playlist.name %></h1>
+
+<ul>
+<%= render partial: "songs/song", collection: @playlist.songs %>
+</ul>
+
+<%= render partial: "songs/form"%>, locals: {playlist: @playlist, song: @song}%>
+```
+
+1.3 In views/songs/_forms.html.erb
+```ruby
+<%= form_for([playlist, song], remote:true, html: {class: "red"}) do |f| %>
+  <%= f.text_field :title, placeholder: "title" %>
+  <%= f.text_field :artist, placeholder: "artist" %>
+  <%= f.submit %>
+<% end %>
+```
+
+2. Alternative Method
+2.1 In controllers/playlists_controller.rb
+```ruby
+class PlaylistsController < ApplicationController
+.
+.
+.
+  def show
+    @playlist = Playlist.find_by(id: params[:id])
+  end
+end
+
+```
+2.2 In views/playlists/show.html.erb
+```ruby
+<h1><%= @playlist.name %></h1>
+
+<ul>
+<%= render partial: "songs/song", collection: @playlist.songs %>
+</ul>
+
+<%= render partial: "songs/form"%> %>
+```
+2.3 In views/songs/_forms.html.erb
+```ruby
+<%= form_for([Playlist.find(params[:id]), Song.new], remote:true, html: {class: "red"}) do |f| %>
+  <%= f.text_field :title, placeholder: "title" %>
+  <%= f.text_field :artist, placeholder: "artist" %>
+  <%= f.submit %>
+<% end %>
 ```
