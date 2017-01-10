@@ -182,7 +182,7 @@ console.log("<%= j @song.errors.full_messages %>")
 
 
 ###FORMS
-1. Alyssa's Method
+####1. Alyssa's Method
 1.1 In controllers/playlists_controller.rb
 ```ruby
 class PlaylistsController < ApplicationController
@@ -216,7 +216,7 @@ end
 <% end %>
 ```
 
-###2. Alternative Method
+####2. Alternative Method
 2.1 In controllers/playlists_controller.rb
 ```ruby
 class PlaylistsController < ApplicationController
