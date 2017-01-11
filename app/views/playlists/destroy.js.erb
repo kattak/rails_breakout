@@ -1,1 +1,2 @@
-$('ul').append("<%= j render partial: 'playlist', locals: {playlist: @playlist} %>")
+console.log("in destroy js")
+$('ul').remove('li#<%=@playlist.id%>')

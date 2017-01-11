@@ -1,1 +1,4 @@
-<li><%= song.title %> - <%= song.artist%></li>
+<li><%= song.title %> - <%= song.artist%>
+
+<%= link_to "delete", playlist_song_path(song.playlist, song), method: :delete, remote: true %>
+</li>
