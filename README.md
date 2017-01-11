@@ -274,3 +274,14 @@ if (element.is('form')) {
 >> find, delete that playlist
 >> redirect to index playlists 
 
+###Private params method
+require then permit 
+```ruby
+  private
+
+  def playlist_params
+    params.require(:playlist).permit(:name)
+  end
+```
+
+###Sinatra
