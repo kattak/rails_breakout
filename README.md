@@ -177,7 +177,10 @@ console.log("<%= j @song.errors.full_messages %>")
 
 ###Three Types of Submits
 1. BASIC HTTP Request (non-AJAX)
-2. AJAX call - Sinatra style
+2. AJAX call - Sinatra style (showing a form to add a new playlist on the playlists index page)
+   > Make a file: app/assets/javascripts/playlists.js
+    > In this file, put in event handlers for submitting the form 
+    > and $.ajax to handle 
 3. AJAX call - Rails 5 style 
 
 
@@ -247,3 +250,27 @@ end
   <%= f.submit %>
 <% end %>
 ```
+###What is remote true?
+"In short, it adds a data-remote="true" attribute to the generated html form as seen here, and submits the form via Ajax automagically." (source)[http://roseweixel.github.io/blog/2015/07/05/integrating-ajax-and-rails-a-simple-todo-list-app/]
+
+-From Rails source code, (source)[https://github.com/rails/jquery-ujs/blob/148571ded762f22ccca84db38d4b4d56853ab395/src/rails.js]
+```ruby
+if (element.is('form')) {
+  method = element.attr('method');
+  url = element.attr('action');
+  data = element.serializeArray();
+  // memoized value from clicked submit button
+  var button = element.data('ujs:submit-button');
+  if (button) {
+    data.push(button);
+    element.data('ujs:submit-button', null);
+  }
+}
+```
+###To Delete
+<%= link_to "Die", playlist_path(playlist), method: :delete %>
+
+> Goes to playlists#destroy 
+>> find, delete that playlist
+>> redirect to index playlists 
+
