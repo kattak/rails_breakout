@@ -284,4 +284,50 @@ require then permit
   end
 ```
 
-###Sinatra
+###Add form to create a new playlist
+- Make _form partial 
+ - Pass in Playlist.new 
+- Form knows to go to playlist#create
+- Check if @playlist.save, format
+  -- Return format.js{}
+  -- Rails knows to return create.js.erb in same views dir as playlist
+
+#####Javascript:
+```javascript
+$('ul').append("<%= j render partial: 'playlist', locals: {playlist: @playlist} %>")
+```
+
+###Link to Delete
+
+
+###Link to Edit 
+
+
+###How does it know if its a form for a new object or an object to edit?
+If Song.new is passed in >> new form >> goes to Song#create
+If saved Song object is passed in >> edit form >> goes to Song#update
+
+#This error
+ActionController::UnknownFormat in PlaylistsController#create
+>Means you haven't included remote: true
+
+###Where does remote: true go?
+```ruby
+<%= form_for Playlist.new, remote: true do |f| %>
+  <%= f.text_field :name %>
+  <%= f.submit %>
+<% end %>
+```
+
+###Links
+```ruby
+  <%= link_to "deelete", playlist, method: :delete %>
+  <%=link_to "edit~", playlist, method: :put%></li>
+```
+ * playlist_path(playlist) == playlist
+
+###
+
+To add modal forms: 
+https://coderwall.com/p/ej0mhg/open-a-rails-form-with-twitter-bootstrap-modals
+http://ericlondon.com/2014/03/13/rails-4-submit-modal-form-via-ajax-and-render-js-response-as-table-row.html
