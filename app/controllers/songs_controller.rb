@@ -1,6 +1,10 @@
 class SongsController < ApplicationController
   def create
-    @song = Song.new(song_params.merge(playlist_id: params[:playlist_id]))
+    playlist = Playlist.find(params[:playlist_id])
+    @song = Song.new(song_params)
+    playlist.songs << @song
+
+  #  @song = Song.new(song_params.merge(playlist_id: params[:playlist_id]))
 
     # {playlist_id: 1, song: {title: "title", artist: "artist"}}
     # {title: "title", artist: "artist"}.merge({playlist_id: "2"})
@@ -8,7 +12,7 @@ class SongsController < ApplicationController
     if @song.save
       respond_to do |format|
         format.js {}
-        format.json { render json: @song }
+    #    format.json { render json: @song }
       end
     else
       respond_to do |format|
