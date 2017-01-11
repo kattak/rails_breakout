@@ -1,0 +1,7 @@
+<h1>Playlists</h1>
+
+<ul>
+<%= render partial: "playlist", collection: @playlists %>
+</ul>
+
+<%= render partial: "form", local: {playlist: Playlist.new} %>
