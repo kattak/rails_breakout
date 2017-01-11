@@ -343,6 +343,8 @@ render :edit
 console.log("hi")
 $(".toys").append( "<%= j render partial: 'toys/index', locals: {toys: @pet.toys} %>" )
 
+###SCSS and SASS
+http://sass-lang.com/guide
 
 To add modal forms: 
 https://coderwall.com/p/ej0mhg/open-a-rails-form-with-twitter-bootstrap-modals
