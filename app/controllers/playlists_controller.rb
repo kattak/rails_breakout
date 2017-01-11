@@ -30,8 +30,9 @@ class PlaylistsController < ApplicationController
   def destroy
     p params
     @playlist = Playlist.find(params[:id])
-    @playlist.destroy
-    redirect_to playlists_path
+    if @playlist.destroy
+      format.js{}
+    end
   end
 
   private
