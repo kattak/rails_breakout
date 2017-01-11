@@ -326,7 +326,23 @@ ActionController::UnknownFormat in PlaylistsController#create
 ```
  * playlist_path(playlist) == playlist
 
-###
+###From Assessment
+  else #pet did not save, has errors
+    @errors = @pet.errors.full_messages
+    render :edit 
+  end
+
+render :edit
+
+
+<%= link_to "Show Toys", remote: true %>
+<div class="toys">
+</div>
+
+
+console.log("hi")
+$(".toys").append( "<%= j render partial: 'toys/index', locals: {toys: @pet.toys} %>" )
+
 
 To add modal forms: 
 https://coderwall.com/p/ej0mhg/open-a-rails-form-with-twitter-bootstrap-modals
